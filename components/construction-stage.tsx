@@ -47,8 +47,9 @@ function mixBounds(a: Bounds, b: Bounds, t: number): Bounds {
 
 export function ConstructionStage() {
   const reduce = usePrefersReducedMotion();
-  const [playing, setPlaying] = useState(false);
-  const playingRef = useRef(false);
+  const [manual, setManual] = useState<boolean | null>(null);
+  const playing = manual ?? !reduce;
+  const playingRef = useRef(playing);
   const timeRef = useRef(0);
   const [frame, setFrame] = useState<Pick<StoryFrame, "caption" | "step">>({
     caption: "Отрезок",
@@ -117,16 +118,13 @@ export function ConstructionStage() {
   usePlate(canvasRef, draw);
 
   useEffect(() => {
-    playingRef.current = playing && !reduce;
-  }, [playing, reduce]);
+    playingRef.current = playing;
+  }, [playing]);
 
   useEffect(() => {
-    if (reduce) {
-      timeRef.current = 12.4;
-      draw();
-      return;
-    }
-    setPlaying(true);
+    if (!reduce) return;
+    timeRef.current = 13.1;
+    draw();
   }, [reduce, draw]);
 
   useEffect(() => {
@@ -172,10 +170,10 @@ export function ConstructionStage() {
             type="button"
             variant="outline"
             size="sm"
-            aria-pressed={playing && !reduce}
-            onClick={() => setPlaying((value) => !value)}
+            aria-pressed={playing}
+            onClick={() => setManual(!playing)}
           >
-            {playing && !reduce ? "Пауза" : "Запустить"}
+            {playing ? "Пауза" : "Запустить"}
           </Button>
         </div>
         <div className="flex flex-wrap gap-2" role="group" aria-label="Шаги сборки">

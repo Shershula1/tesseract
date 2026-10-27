@@ -85,8 +85,11 @@ function shoelace(pts: { x: number; y: number }[]) {
 
 export function ProjectionStage() {
   const reduce = usePrefersReducedMotion();
-  const reduceRef = useRef(reduce);
-  reduceRef.current = reduce;
+  const reduceRef = useRef(false);
+
+  useEffect(() => {
+    reduceRef.current = reduce;
+  }, [reduce]);
   const timeRef = useRef(0.4);
   const facePick = useRef(0);
 
@@ -208,8 +211,8 @@ export function ProjectionStage() {
     const { width, height, dpr } = plateSize(canvas);
     prepare(ctx, width, height, dpr);
 
-    const theta = reduceRef.current ? 0.42 : 0.28 + Math.sin(timeRef.current * 0.32) * 0.34;
-    const yaw = 0.58 + Math.sin(timeRef.current * 0.18) * 0.06;
+    const theta = reduceRef.current ? 0.4 : 0.36 + Math.sin(timeRef.current * 0.28) * 0.16;
+    const yaw = 0.72 + Math.sin(timeRef.current * 0.16) * 0.05;
     const points = projectTesseract(theta, yaw, 0.36);
     const scale = Math.min(width, height) * 0.2;
     const screen = (index: number) => ({
@@ -245,7 +248,7 @@ export function ProjectionStage() {
       const hot = cell.has(edge.a) && cell.has(edge.b);
       const pa = screen(edge.a);
       const pb = screen(edge.b);
-      stroke(ctx, pa.x, pa.y, pb.x, pb.y, hot ? "#f0c56a" : "#d9cbb8", hot ? 2.15 : 1.15, hot ? 1 : 0.38);
+      stroke(ctx, pa.x, pa.y, pb.x, pb.y, hot ? "#f0c56a" : "#f3eadf", hot ? 2.2 : 1.25, hot ? 1 : 0.72);
     }
   }, []);
 

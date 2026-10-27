@@ -4,7 +4,10 @@ import { useEffect, useRef, type RefObject } from "react";
 
 export function usePlate(ref: RefObject<HTMLCanvasElement | null>, redraw: () => void) {
   const redrawRef = useRef(redraw);
-  redrawRef.current = redraw;
+
+  useEffect(() => {
+    redrawRef.current = redraw;
+  });
 
   useEffect(() => {
     const canvas = ref.current;

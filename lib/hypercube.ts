@@ -83,7 +83,7 @@ export function embedParallel(p: number[]) {
   const z = p[2] ?? 0;
   const w = p[3] ?? 0;
   return {
-    x: x + z * 0.56 + w * 1.38,
-    y: y + z * 0.34 + w * 1.18,
+    x: x + z * 0.75 + w * 2.05,
+    y: y + z * 0.46 + w * 1.72,
   };
 }

@@ -11,8 +11,9 @@ import { projectTesseract } from "@/lib/project";
 
 export function RotationStage() {
   const reduce = usePrefersReducedMotion();
-  const [playing, setPlaying] = useState(false);
-  const playingRef = useRef(false);
+  const [manual, setManual] = useState<boolean | null>(null);
+  const playing = manual ?? !reduce;
+  const playingRef = useRef(playing);
   const timeRef = useRef(0.35);
   const drag = useRef({
     active: false,
@@ -74,12 +75,8 @@ export function RotationStage() {
   usePlate(canvasRef, draw);
 
   useEffect(() => {
-    playingRef.current = playing && !reduce;
-  }, [playing, reduce]);
-
-  useEffect(() => {
-    if (!reduce) setPlaying(true);
-  }, [reduce]);
+    playingRef.current = playing;
+  }, [playing]);
 
   useEffect(() => {
     let frame = 0;
@@ -145,10 +142,10 @@ export function RotationStage() {
           type="button"
           variant="outline"
           size="sm"
-          aria-pressed={playing && !reduce}
-          onClick={() => setPlaying((value) => !value)}
+          aria-pressed={playing}
+          onClick={() => setManual(!playing)}
         >
-          {playing && !reduce ? "Пауза" : "Запустить"}
+          {playing ? "Пауза" : "Запустить"}
         </Button>
       </figcaption>
     </figure>

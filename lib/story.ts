@@ -42,10 +42,10 @@ const SEGMENTS: Segment[] = [
 export const STORY_DURATION = 14.4;
 
 export const STORY_STEPS = [
-  { label: "Отрезок", time: 0 },
-  { label: "Квадрат", time: 1.55 },
-  { label: "Куб", time: 4.9 },
-  { label: "Тессеракт", time: 8.55 },
+  { label: "Отрезок", time: 1.15 },
+  { label: "Квадрат", time: 4.4 },
+  { label: "Куб", time: 8.05 },
+  { label: "Тессеракт", time: 13.0 },
 ] as const;
 
 export function storyAt(time: number): StoryFrame {
