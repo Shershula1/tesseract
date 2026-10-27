@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --background: #090807;
+  --foreground: #f3eadf;
+  --primary: #e6b15a;
+  --primary-foreground: #1a1208;
+  --muted: #cbbba6;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --font-display: var(--font-cormorant), "Iowan Old Style", Palatino, serif;
+  --font-body: var(--font-literata), Georgia, "Times New Roman", serif;
+}
+
+html {
+  background: #090807;
+}
+
+body {
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse 70% 42% at 50% -8%, rgba(230, 177, 90, 0.16), transparent 58%),
+    #090807;
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: rgba(230, 177, 90, 0.35);
+  color: #fff8ee;
+}
+
+.vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: radial-gradient(ellipse at center, transparent 62%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.prose-copy {
+  font-size: 1.075rem;
+  line-height: 1.75;
+  color: #efe4d4;
+}
+
+.prose-copy p + p {
+  margin-top: 1.15rem;
+}
+
+@media (max-width: 640px) {
+  .prose-copy {
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+}
