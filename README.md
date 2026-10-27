@@ -11,4 +11,12 @@ npm run dev
 
 Откройте [http://127.0.0.1:4721](http://127.0.0.1:4721).
 
-Остановить сервер: `Ctrl+C`. Сборка без сервера разработки: `npm run build`, затем `npm start`.
+Остановить сервер: `Ctrl+C`.
+
+Статическая сборка для GitHub Pages попадает в папку `out`:
+
+```bash
+PAGES_BASE_PATH=/tesseract npm run build
+```
+
+Публичный адрес после включения Pages у репозитория с именем `tesseract`: [https://retivykh.github.io/tesseract/](https://retivykh.github.io/tesseract/). Локально, без этого префикса, достаточно `npm run build`.
